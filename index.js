@@ -15,8 +15,12 @@ const myEmitter = new MyEmitter();
 // add the listener for the logEvent
 myEmitter.on('log', (event, level, msg) => logEvents(event, level, msg));
 
-const server = http.createServer((request, response) => {
+// This is the information feed module
+const { news } = require("./news.js");
+
+const server = http.createServer(async (request, response) => {
     let path = "./views/";
+    let newsPromise = await news();
     switch(request.url) {
         case '/':
             path += "index.html";
@@ -52,6 +56,14 @@ const server = http.createServer((request, response) => {
             myEmitter.emit('log', request.url, 'INFO', 'route was visited');
             response.setHeader('Set-cookie', 'subscription=New');
             routes.subscribePage(path, response);
+            break;
+        case '/news':
+            if(DEBUG) console.info(request.url);
+            myEmitter.emit('log', request.url, 'INFO', 'news site was visited');
+            response.statusCode = 200;
+            response.writeHead(response.statusCode, { "Content-Type": "application/json" });
+            response.write(newsPromise);
+            response.end();
             break;
         case '/about-me':
             // this is a redirect for a deprecated route

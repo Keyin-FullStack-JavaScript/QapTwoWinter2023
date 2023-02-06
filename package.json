@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Keyin-FullStack-JavaScript/QapTwoWinter2023#readme",
   "dependencies": {
     "date-fns": "^2.29.3",
+    "newsapi": "^2.4.1",
     "uuid": "^9.0.0"
   }
 }
