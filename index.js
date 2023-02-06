@@ -1,44 +1,49 @@
-//we need a http server
+// we need a http server
 const http = require('http');
+// Put the routes in their own file
+const routes = require('./routes.js');
+// add a global for debugging
+global.DEBUG = true;
 
 const server = http.createServer((request, response) => {
     let path = "./views/";
     switch(request.url) {
         case '/':
             path += "index.html";
-            console.info(path);
-            response.end('multi-route-server-2');
+            if(DEBUG) console.info(path);
+            response.statusCode = 200;
+            routes.indexPage(path, response);
             break;
         case '/about':
             path += "about.html";
-            console.info(path);
+            if(DEBUG) console.info(path);
             response.end('multi-route-server-2');
             break;
         case '/contact':
             path += "contact.html";
-            console.info(path);
+            if(DEBUG) console.info(path);
             response.end('multi-route-server-2');
             break;
         case '/depart':
             path += "depart.html";
-            console.info(path);
+            if(DEBUG) console.info(path);
             response.end('multi-route-server-2');
             break;
         case '/subscribe':
             path += "subscribe.html"
-            console.info(path);
+            if(DEBUG) console.info(path);
             response.end('multi-route-server-2');
             break;
         case '/about-me':
             // this is a redirect for a deprecated route
-            console.info('redirect to /about');
+            if(DEBUG) console.info('redirect to /about');
             response.statusCode = 301;
             response.setHeader('Location', '/about');
             response.end();
             break;
         default:
             path += "404.html";
-            console.info(path);
+            if(DEBUG) console.info(path);
             response.end('multi-route-server-2');
             break;
     }
