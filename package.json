@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,9 @@
     "url": "https://github.com/Keyin-FullStack-JavaScript/QapTwoWinter2023/issues"
   },
   "homepage": "https://github.com/Keyin-FullStack-JavaScript/QapTwoWinter2023#readme",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  },
   "dependencies": {
     "date-fns": "^2.29.3",
     "newsapi": "^2.4.1",

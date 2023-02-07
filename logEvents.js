@@ -12,7 +12,7 @@
  *      implement DEBUG global
  * 14 Oct 2022, PJR, moved into github project qap-two
  *      enhanced with additional folder creation for yyyy
- * 06 Feb 2023, PJR, fixed the logs/ folder creation bug
+ * 06 Feb 2023, PJR, fixed the logs/yyyy folder creation bug
  *
  *************************/
 // NPM installed Modules
@@ -26,11 +26,9 @@ const path = require('path');
 const logEvents = async (event, level, message) => {
     const dateTime = `${format(new Date(), 'yyyyMMdd\tHH:mm:ss')}`;
     const logItem = `${dateTime}\t${level}\t${event}\t${message}\t${uuid()}`;
-    if(DEBUG) console.log(logItem);
     try {
         // Include year when managing log folders
         const currFolder = 'logs/' + getYear(new Date());
-        if(DEBUG) console.log(currFolder);
         if(!fs.existsSync(path.join(__dirname, 'logs/'))) {
             // if the parent directory logs/ doesn't exist, create it
             await fsPromises.mkdir(path.join(__dirname, 'logs/'));
