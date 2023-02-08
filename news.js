@@ -6,8 +6,10 @@ async function news() {
   let array = [];
   await newsapi.v2
     .everything({
-      q: "renewables",
+      q: "vancouver",
       language: "en",
+      from: "2023-02-08",
+      to: "2023-02-08"
     })
     .then((response) => {
       result = JSON.stringify(response.articles);

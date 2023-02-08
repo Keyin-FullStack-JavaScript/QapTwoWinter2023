@@ -20,7 +20,6 @@ const { news } = require("./news.js");
 
 const server = http.createServer(async (request, response) => {
     let path = "./views/";
-    let newsPromise = await news();
     switch(request.url) {
         case '/':
             path += "index.html";
@@ -59,6 +58,7 @@ const server = http.createServer(async (request, response) => {
             break;
         case '/news':
             if(DEBUG) console.info(request.url);
+            let newsPromise = await news();
             myEmitter.emit('log', request.url, 'INFO', 'news site was visited');
             response.statusCode = 200;
             response.writeHead(response.statusCode, { "Content-Type": "application/json" });
